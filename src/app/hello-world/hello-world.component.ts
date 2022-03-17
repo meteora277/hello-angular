@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-hello-world',
   template: `
-    <p>
-      hello-world works!
-    </p>
+    <p>hello-world works! {{ count }}</p>
+    <button type="button" (click)="onClickMe()">uwu</button>
   `,
-  styles: [
-  ]
+  styles: [],
 })
 export class HelloWorldComponent implements OnInit {
+  count: number = 0;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  onClickMe() {
+    this.count += 1;
   }
 
+  ngOnInit(): void {}
 }
