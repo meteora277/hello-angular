@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-hello-world',
   template: `
     <p>hello {{ nome }}</p>
+    <p>You have \${{ wallet }} in your wallet</p>
     <input
       type="text"
       name="name"
@@ -21,22 +22,9 @@ export class HelloWorldComponent implements OnInit {
 
   constructor() {}
 
-  onClick() {
-    console.log(this.nome);
-  }
-
-  onChangeName(name: string) {
-    this.nome = name;
-  }
   inputChange(event: any) {
     localStorage.setItem('name', event.target.value);
   }
-
-  addNameLocal(name: string) {
-    localStorage.setItem('name', name);
-    this.nome = name;
-  }
-
   ngOnInit(): void {
     if (!localStorage.getItem('lastChecked')) {
       localStorage.setItem('lastChecked', JSON.stringify(Date.now()));
