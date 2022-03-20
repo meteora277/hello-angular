@@ -3,33 +3,38 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-hello-world',
   template: `
-    <p>hello {{ name }}</p>
-    <button type="button" (click)="onClickMe()">uwu</button>
-    <button (click)="onClickReset()">Reset</button>
+    <p>hello {{ nome }}</p>
+    <button type="button" (click)="onClick()">uwu</button>
     <button (click)="addNameLocal('uwu')">Add uwu to local storage</button>
+    <input
+      type="text"
+      name="name"
+      [(ngModel)]="nome"
+      placeholder="uwu"
+      (keyup)="inputChange($event)"
+    />
   `,
   styles: [],
 })
 export class HelloWorldComponent implements OnInit {
-  count: number = 0;
-  name: string = localStorage.getItem('name') || '';
+  nome: string = localStorage.getItem('name') || '';
 
   constructor() {}
 
-  onClickMe() {
-    this.count += 1;
+  onClick() {
+    console.log(this.nome);
   }
 
-  onClickReset() {
-    this.count = 0;
-  }
   onChangeName(name: string) {
-    this.name = name;
+    this.nome = name;
+  }
+  inputChange(event: any) {
+    localStorage.setItem('name', event.target.value);
   }
 
   addNameLocal(name: string) {
     localStorage.setItem('name', name);
-    this.name = name;
+    this.nome = name;
   }
 
   ngOnInit(): void {}
