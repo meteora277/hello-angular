@@ -3,29 +3,41 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-hello-world',
   template: `
-    <p>hello {{ nome }}</p>
-    <p>You have \${{ wallet }} in your wallet</p>
+    <p>
+      Hello {{ name
+      }}<span [style]="'font-size: 10px'" (click)="show()"> (edit)</span>
+    </p>
     <input
+      *ngIf="shown"
       type="text"
       name="name"
-      [(ngModel)]="nome"
+      [(ngModel)]="name"
       placeholder="uwu"
       (keyup)="inputChange($event)"
     />
+    <p>You have \${{ wallet }} in your wallet</p>
   `,
   styles: [],
 })
 export class HelloWorldComponent implements OnInit {
-  nome: string = localStorage.getItem('name') || '';
+  name: string = localStorage.getItem('name') || '';
   wallet: number = Number(localStorage.getItem('wallet')) || 0;
   lastChecked: number = Number(localStorage.getItem('lastChecked'));
-
+  shown: boolean = false;
   constructor() {}
+
+  show() {
+    this.shown = !this.shown;
+  }
 
   inputChange(event: any) {
     localStorage.setItem('name', event.target.value);
   }
   ngOnInit(): void {
+    if (!localStorage.getItem('name')) {
+      localStorage.setItem('name', 'new user');
+      this.name = 'new user';
+    }
     if (!localStorage.getItem('lastChecked')) {
       localStorage.setItem('lastChecked', JSON.stringify(Date.now()));
       localStorage.setItem('wallet', '10');
