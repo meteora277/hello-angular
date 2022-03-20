@@ -4,8 +4,6 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-hello-world',
   template: `
     <p>hello {{ nome }}</p>
-    <button type="button" (click)="onClick()">uwu</button>
-    <button (click)="addNameLocal('uwu')">Add uwu to local storage</button>
     <input
       type="text"
       name="name"
@@ -18,6 +16,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HelloWorldComponent implements OnInit {
   nome: string = localStorage.getItem('name') || '';
+  wallet: number = Number(localStorage.getItem('wallet')) || 0;
+  lastChecked: number = Number(localStorage.getItem('lastChecked'));
 
   constructor() {}
 
@@ -37,5 +37,16 @@ export class HelloWorldComponent implements OnInit {
     this.nome = name;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (!localStorage.getItem('lastChecked')) {
+      localStorage.setItem('lastChecked', JSON.stringify(Date.now()));
+      localStorage.setItem('wallet', '10');
+    }
+    const daysElapsed = (Date.now() - this.lastChecked) / (1000 * 60 * 60 * 24);
+    // add lastCheck conditional because if 0 Date.now() would be a large value and wallet would get wrong value
+    if (daysElapsed >= 1 && this.lastChecked !== 0) {
+      localStorage.setItem('wallet', `${(this.wallet += 10 * daysElapsed)}`);
+      localStorage.setItem('lastChecked', JSON.stringify(Date.now()));
+    }
+  }
 }
