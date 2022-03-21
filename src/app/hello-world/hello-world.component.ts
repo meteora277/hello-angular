@@ -21,7 +21,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HelloWorldComponent implements OnInit {
   name: string = localStorage.getItem('name') || '';
-  wallet: number = Number(localStorage.getItem('wallet')) || 0;
+  wallet: number = Number(localStorage.getItem('wallet')) || 10;
   lastChecked: number = Number(localStorage.getItem('lastChecked'));
   shown: boolean = false;
   constructor() {}
@@ -42,7 +42,10 @@ export class HelloWorldComponent implements OnInit {
       localStorage.setItem('lastChecked', JSON.stringify(Date.now()));
       localStorage.setItem('wallet', '10');
     }
-    const daysElapsed = (Date.now() - this.lastChecked) / (1000 * 60 * 60 * 24);
+    const daysElapsed = Math.floor(
+      (Date.now() - this.lastChecked) / (1000 * 60 * 60 * 24)
+    );
+
     // add lastCheck conditional because if 0 Date.now() would be a large value and wallet would get wrong value
     if (daysElapsed >= 1 && this.lastChecked !== 0) {
       localStorage.setItem('wallet', `${(this.wallet += 10 * daysElapsed)}`);
