@@ -8,6 +8,7 @@ import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { WalletModule } from './wallet/wallet.module';
 
 @NgModule({
   declarations: [AppComponent, HelloWorldComponent],
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     NbEvaIconsModule,
     AppRoutingModule,
     FormsModule,
+    WalletModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
