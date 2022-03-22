@@ -35,6 +35,10 @@ export class HelloWorldComponent implements OnInit {
     this.shown = !this.shown;
   }
 
+  updateWallet() {
+    this.wallet = Number(localStorage.getItem('wallet'));
+  }
+
   inputChange(event: any) {
     localStorage.setItem('name', event.target.value);
   }
