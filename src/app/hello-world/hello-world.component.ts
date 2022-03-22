@@ -3,21 +3,26 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-hello-world',
   template: `
-    <p>
-      Hello {{ name
-      }}<span [style]="'font-size: 10px'" (click)="show()"> (edit)</span>
-    </p>
-    <input
-      *ngIf="shown"
-      type="text"
-      name="name"
-      [(ngModel)]="name"
-      placeholder="uwu"
-      (keyup)="inputChange($event)"
-    />
-    <p>You have \${{ wallet }} in your wallet</p>
+    <div>
+      <p>
+        Hello {{ name
+        }}<span [style]="'font-size: 10px'" (click)="show()"> (edit)</span>
+      </p>
+      <input
+        *ngIf="shown"
+        type="text"
+        name="name"
+        [(ngModel)]="name"
+        placeholder="uwu"
+        (keyup)="inputChange($event)"
+      />
+
+      <p>You have \${{ wallet }} in your wallet</p>
+    </div>
   `,
-  styles: [],
+  styles: [
+    ' div {display: flex; justify-content: center; flex-direction: column; text-align: center;}',
+  ],
 })
 export class HelloWorldComponent implements OnInit {
   name: string = localStorage.getItem('name') || '';
