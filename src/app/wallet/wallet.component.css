@@ -1,15 +1,10 @@
 div {
   background-color: rgb(128, 128, 223);
-  width: 33%;
+  max-width: 90%;
+  margin: 0 auto;
   height: 300px;
   display: grid;
   place-items: center;
   font-size: 10rem;
   border-radius: 1rem;
-}
-
-@media screen and (max-width: 1000px) {
-  div {
-    width: 90%;
-  }
 }
