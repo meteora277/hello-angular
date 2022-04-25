@@ -43,12 +43,10 @@ export class HelloWorldComponent implements OnInit {
   }
 
   showLog() {
-    console.log(
-      this.windowRef.nativeWindow.navigator.geolocation.getCurrentPosition(
-        (res: any) => {
-          console.log(res);
-        }
-      )
+    this.windowRef.nativeWindow.navigator.geolocation.getCurrentPosition(
+      (res: any) => {
+        console.log(res);
+      }
     );
   }
 
