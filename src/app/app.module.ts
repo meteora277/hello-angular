@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { WalletModule } from './wallet/wallet.module';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [AppComponent, HelloWorldComponent],
   imports: [
@@ -21,6 +23,7 @@ import { WalletModule } from './wallet/wallet.module';
     AppRoutingModule,
     FormsModule,
     WalletModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
