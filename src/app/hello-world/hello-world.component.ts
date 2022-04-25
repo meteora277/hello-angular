@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { WindowRefService } from '../core/window-ref.service';
 
 @Component({
   selector: 'app-hello-world',
@@ -19,6 +20,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
       <p>You have \${{ wallet }} in your wallet</p>
     </div>
+    <button (click)="showLog()">Log</button>
   `,
   styles: [
     ' div {display: flex; justify-content: center; flex-direction: column; text-align: center;}',
@@ -29,7 +31,8 @@ export class HelloWorldComponent implements OnInit {
   wallet: number = Number(localStorage.getItem('wallet')) || 10;
   lastChecked: number = Number(localStorage.getItem('lastChecked'));
   shown: boolean = false;
-  constructor() {}
+
+  constructor(private windowRef: WindowRefService) {}
 
   show() {
     this.shown = !this.shown;
@@ -37,6 +40,16 @@ export class HelloWorldComponent implements OnInit {
 
   updateWallet() {
     this.wallet = Number(localStorage.getItem('wallet'));
+  }
+
+  showLog() {
+    console.log(
+      this.windowRef.nativeWindow.navigator.geolocation.getCurrentPosition(
+        (res: any) => {
+          console.log(res);
+        }
+      )
+    );
   }
 
   inputChange(event: any) {
