@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { GetDataService } from '../core/get-data.service';
+
 import { WindowRefService } from '../core/window-ref.service';
 
 @Component({
@@ -21,6 +23,7 @@ import { WindowRefService } from '../core/window-ref.service';
       <p>You have \${{ wallet }} in your wallet</p>
     </div>
     <button (click)="showLog()">Log</button>
+    <button (click)="getData()">Get Data</button>
   `,
   styles: [
     ' div {display: flex; justify-content: center; flex-direction: column; text-align: center;}',
@@ -32,7 +35,10 @@ export class HelloWorldComponent implements OnInit {
   lastChecked: number = Number(localStorage.getItem('lastChecked'));
   shown: boolean = false;
 
-  constructor(private windowRef: WindowRefService) {}
+  constructor(
+    private windowRef: WindowRefService,
+    private data: GetDataService
+  ) {}
 
   show() {
     this.shown = !this.shown;
@@ -48,6 +54,13 @@ export class HelloWorldComponent implements OnInit {
         console.log(res);
       }
     );
+  }
+
+  getData() {
+    this.data.getData().subscribe((data: any) => {
+      this.data = { ...data };
+      console.log(this.data);
+    });
   }
 
   inputChange(event: any) {
